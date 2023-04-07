@@ -3,21 +3,27 @@ import random
 app = Flask(__name__)
 app.secret_key = 'keep it secret, keep it safe'
 
+
 @app.route('/')
 def index():
+    if 'tries' not in session:
+        session['tries'] = 0
     if 'random' not in session:
         session['random'] = random.randint(1, 100)
     return render_template('index.html')
 
 @app.route('/guess', methods=['POST'])
 def guess():
-    if int(request.form['guess']) == session['random']:
+    session['tries'] += 1
+    if int(request.form['guess']) == session['random'] and session['tries'] <= 5:
         iscorrect = 'correct'
-    elif int(request.form['guess']) > session['random']:
+    elif int(request.form['guess']) > session['random'] and session['tries'] <= 5:
         iscorrect = 'high'
-    else:
+    elif int(request.form['guess']) < session['random'] and session['tries'] <= 5:
         iscorrect = 'low'
-    return render_template('index.html', iscorrect = iscorrect)
+    else:
+        iscorrect = 'game_over'
+    return render_template('index.html', iscorrect = iscorrect, tries = session['tries'])
 
 @app.route('/reset', methods=['POST'])
 def reset():

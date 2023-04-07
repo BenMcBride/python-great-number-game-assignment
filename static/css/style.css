@@ -10,8 +10,8 @@ body {
     margin: 0 auto;
     color: #f28f1f;
     font-size: 3rem;
-    width: 300px;
-    height: 180px;
+    width: 400px;
+    height: 250px;
     background-color: rgb(119, 0, 0);
 }
 .correct {
@@ -21,8 +21,8 @@ body {
     margin: 0 auto;
     color: #f28f1f;
     font-size: 3rem;
-    width: 300px;
-    height: 180px;
+    width: 400px;
+    height: 250px;
     background-color: green;
 }
 .guess-form-box {
