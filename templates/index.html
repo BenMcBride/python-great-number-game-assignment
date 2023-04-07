@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+    <h1>Welcome to the Great Number Game!</h1>
+    <h3>I am thinking of a number between 1 and 100.</h3>
+    {%if iscorrect == 'high':%}
+        <div class="incorrect">Too High!</div>
+    {%elif iscorrect == 'low':%}
+        <div class="incorrect">Too Low!</div>
+    {%elif iscorrect == 'correct':%}
+        <div class="correct">Correct! Answer: {{session['random']}}</div>
+        <form class="form" action="/reset" method="post">
+            <button class="btn reset" type="submit">Reset Game!</button>
+        </form>
+    {%endif%}
+    <div class="guess-form-box">
+        <h3>Take a guess!</h3>
+        <form class="form" action="/guess" method="post">
+            <input class="field" type="text" name="guess">
+            <button class="btn" type="submit">Guess</button>
+        </form>
+    </div>
+
+</body>
+</html>
