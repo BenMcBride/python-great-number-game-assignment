@@ -25,9 +25,22 @@ def guess():
         iscorrect = 'game_over'
     return render_template('index.html', iscorrect = iscorrect, tries = session['tries'])
 
+@app.route('/leaderboard', methods=['POST'])
+def addLeader():
+    if 'leaders' not in session:
+        session['leaders'] = {request.form['leader_name']: session['tries']}
+    else:
+        session['leaders'][request.form['leader_name']] = session['tries']
+    return render_template('leaderboard.html', tries = session['tries'], leaders = session['leaders'])
+
 @app.route('/reset', methods=['POST'])
 def reset():
-    session.clear()
+    if 'leaders' in session:
+        leaders = session['leaders']
+        session.clear()
+        session['leaders'] = leaders
+    else:
+        session.clear()
     return redirect('/')
 
 if __name__=="__main__":

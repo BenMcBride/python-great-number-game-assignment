@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+    <h1>Welcome to the Great Number Game Leaderboard!</h1>
+    <div class="container">
+        <table class="table table-bordered table-dark table-hover">
+            <tbody class="table-group-divider table-dark">
+            {% for i in leaders %}
+                <tr>
+                    <td>Name: {{i}}    </td>
+                    <td>||</td>
+                    <td>Tries: {{leaders[i]}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <form class="form" action="/reset" method="post">
+        <button class="btnn reset" type="submit">Reset Game!</button>
+    </form>
+</body>
+</html>
